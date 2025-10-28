@@ -2,3 +2,4 @@
 ./.terraform.lock.hcl
 vscode/
 .idea/
+node_modules/

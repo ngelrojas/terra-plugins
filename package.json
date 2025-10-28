@@ -1,0 +1,32 @@
+{
+  "name": "terra-plugins",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "bin": {
+    "terra": "dist/index.js"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts"
+  },
+  "keywords": [],
+  "author": "angel rojas pacheco",
+  "license": "MIT",
+  "packageManager": "pnpm@10.8.1",
+  "devDependencies": {
+    "@types/commander": "^2.12.5",
+    "@types/inquirer": "^9.0.9",
+    "@types/node": "^24.9.1",
+    "@types/yaml": "^1.9.7",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.2",
+    "inquirer": "^12.10.0",
+    "yaml": "^2.8.1"
+  }
+}
