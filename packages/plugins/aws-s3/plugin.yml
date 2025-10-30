@@ -1,0 +1,17 @@
+name: aws-s3
+version: 0.1.0
+provider: aws
+description: Managed S3 bucket with secure defaults
+inputs:
+  - name: bucket_name
+type: string
+outputs:
+  - name: bucket_arn
+  - name: bucket_name
+capabilities:
+  - actor: instance-profile
+needs:
+  - action: s3:PutObject
+resource: ${bucket_arn}
+  - action: s3:GetObject
+resource: ${bucket_arn}

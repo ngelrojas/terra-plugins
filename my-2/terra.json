@@ -1,0 +1,8 @@
+{
+  "provider": "aws",
+  "envPrefix": "prod",
+  "plugins": [
+    "aws-sqs"
+  ],
+  "links": []
+}

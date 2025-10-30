@@ -1,0 +1,12 @@
+[
+  {
+    "name": "aws-s3",
+    "description": "Create an S3 bucket (versioning, blocking public ACLs)",
+    "source": "workspace:packages/plugins/aws-s3"
+  },
+  {
+    "name": "aws-sqs",
+    "description": "Create an SQS queue (optional DLQ)",
+    "source": "workspace:packages/plugins/aws-sqs"
+  }
+]
