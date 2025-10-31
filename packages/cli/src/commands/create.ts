@@ -3,15 +3,27 @@ import path from 'path';
 import inquirer from 'inquirer';
 
 
+
 export async function createProject(name: string) {
     const target = path.resolve(process.cwd(), name);
     fs.mkdirSync(target, { recursive: true });
 
 
-// Basic manifest
+    // Prompt for provider and environment prefix
     const answers = await inquirer.prompt([
-        { type: 'list', name: 'provider', message: 'Choose provider', choices: ['aws'], default: 'aws' },
-        { type: 'input', name: 'envPrefix', message: 'Environment prefix', default: 'prod' }
+        {
+            type: 'list',
+            name: 'provider',
+            message: 'Choose provider:',
+            choices: ['aws', 'gcp', 'azure'],
+            default: 'aws'
+        },
+        {
+            type: 'input',
+            name: 'envPrefix',
+            message: 'Environment prefix (e.g., dev, prod):',
+            default: 'dev'
+        }
     ]);
 
 
@@ -24,5 +36,4 @@ export async function createProject(name: string) {
 
 
     fs.writeFileSync(path.join(target, 'terra.json'), JSON.stringify(manifest, null, 2));
-    fs.mkdirSync(path.join(target, 'plugins'), { recursive: true });
 }

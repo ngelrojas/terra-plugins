@@ -26,9 +26,12 @@ program
 
 program
     .command('add')
-    .argument('<plugin>')
-    .description('Add a plugin (from registry.json or path)')
-    .action(async (pluginName: string) => {
+    .argument('<provider>')
+    .argument('[plugin]')
+    .description('Add a plugin (from registry.json or path). Usage: terra add <provider> <plugin>')
+    .action(async (provider: string, plugin?: string) => {
+        // If plugin is not provided, assume old syntax (single argument)
+        const pluginName = plugin ? `${provider}/${plugin}` : provider;
         await addPlugin(process.cwd(), pluginName);
     });
 

@@ -1,12 +1,57 @@
 [
   {
-    "name": "aws-s3",
+    "name": "aws/s3",
     "description": "Create an S3 bucket (versioning, blocking public ACLs)",
-    "source": "workspace:packages/plugins/aws-s3"
+    "source": "workspace:packages/plugins/aws/s3"
   },
   {
-    "name": "aws-sqs",
+    "name": "aws/sqs",
     "description": "Create an SQS queue (optional DLQ)",
-    "source": "workspace:packages/plugins/aws-sqs"
+    "source": "workspace:packages/plugins/aws/sqs"
+  },
+  {
+    "name": "aws/iam-role",
+    "description": "Create IAM Roles with assume role policy",
+    "source": "workspace:packages/plugins/aws/iam-role"
+  },
+  {
+    "name": "aws/iam-policy",
+    "description": "Create and attach IAM Policies",
+    "source": "workspace:packages/plugins/aws/iam-policy"
+  },
+  {
+    "name": "aws/iam-user",
+    "description": "Create IAM users and access keys",
+    "source": "workspace:packages/plugins/aws/iam-user"
+  },
+  {
+    "name": "aws/vpc",
+    "description": "Create VPC network",
+    "source": "workspace:packages/plugins/aws/vpc"
+  },
+  {
+    "name": "aws/subnet",
+    "description": "Create public/private subnets",
+    "source": "workspace:packages/plugins/aws/subnet"
+  },
+  {
+    "name": "aws/security-group",
+    "description": "Create and manage security groups",
+    "source": "workspace:packages/plugins/aws/security-group"
+  },
+  {
+    "name": "aws/internet-gateway",
+    "description": "Attach internet gateway to VPC for internet access",
+    "source": "workspace:packages/plugins/aws/internet-gateway"
+  },
+  {
+    "name": "aws/route-table",
+    "description": "Manage VPC routing",
+    "source": "workspace:packages/plugins/aws/route-table"
+  },
+  {
+    "name": "aws/elastic-ip",
+    "description": "Allocate Elastic IP for EC2 or NAT Gateway",
+    "source": "workspace:packages/plugins/aws/elastic-ip"
   }
 ]

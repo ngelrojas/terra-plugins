@@ -10,7 +10,11 @@ export * from './types';
 export async function build(projectDir: string) {
     const manifest = await readManifest(projectDir);
     const metas = await Promise.all(
-        manifest.plugins.map(async (name) => loadPluginMeta(path.join(projectDir, 'plugins', name)))
+        manifest.plugins.map(async (name) => {
+            // Convert "aws/s3" to "aws-s3"
+            const flattenedName = name.replace(/\//g, '-');
+            return loadPluginMeta(path.join(projectDir, flattenedName));
+        })
     );
     const nodes = metas.map(m => ({ name: m.name, meta: m }));
     const edges = buildDag(nodes, manifest.links || []);

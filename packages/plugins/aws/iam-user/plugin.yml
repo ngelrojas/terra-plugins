@@ -1,0 +1,23 @@
+name: aws/iam-user
+version: 0.1.0
+provider: aws
+description: Create IAM user and access keys
+inputs:
+  - name: user_name
+    type: string
+  - name: create_access_key
+    type: bool
+    optional: true
+outputs:
+  - name: user_arn
+  - name: user_name
+  - name: access_key_id
+  - name: secret_access_key
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: iam:CreateUser
+        resource: "*"
+      - action: iam:CreateAccessKey
+        resource: "*"
+

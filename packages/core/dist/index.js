@@ -27,7 +27,11 @@ __exportStar(require("./pluginLoader"), exports);
 __exportStar(require("./types"), exports);
 async function build(projectDir) {
     const manifest = await (0, pluginLoader_1.readManifest)(projectDir);
-    const metas = await Promise.all(manifest.plugins.map(async (name) => (0, pluginLoader_1.loadPluginMeta)(path_1.default.join(projectDir, 'plugins', name))));
+    const metas = await Promise.all(manifest.plugins.map(async (name) => {
+        // Convert "aws/s3" to "aws-s3"
+        const flattenedName = name.replace(/\//g, '-');
+        return (0, pluginLoader_1.loadPluginMeta)(path_1.default.join(projectDir, flattenedName));
+    }));
     const nodes = metas.map(m => ({ name: m.name, meta: m }));
     const edges = (0, dagEngine_1.buildDag)(nodes, manifest.links || []);
     const order = (0, dagEngine_1.topoSort)(nodes, edges);

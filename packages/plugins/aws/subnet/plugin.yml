@@ -1,0 +1,30 @@
+name: aws/subnet
+version: 0.1.0
+provider: aws
+description: Create public/private subnets
+inputs:
+  - name: subnet_name
+    type: string
+  - name: vpc_id
+    type: string
+  - name: cidr_block
+    type: string
+  - name: availability_zone
+    type: string
+  - name: map_public_ip_on_launch
+    type: bool
+    optional: true
+outputs:
+  - name: subnet_id
+  - name: subnet_arn
+  - name: subnet_cidr_block
+dependencies:
+  - aws/vpc
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: ec2:CreateSubnet
+        resource: "*"
+      - action: ec2:DescribeSubnets
+        resource: "*"
+

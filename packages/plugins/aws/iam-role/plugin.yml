@@ -1,0 +1,21 @@
+name: aws/iam-role
+version: 0.1.0
+provider: aws
+description: Create IAM Role with assume role policy
+inputs:
+  - name: role_name
+    type: string
+  - name: assume_role_policy
+    type: string
+outputs:
+  - name: role_arn
+  - name: role_name
+  - name: role_id
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: iam:CreateRole
+        resource: "*"
+      - action: iam:GetRole
+        resource: "*"
+

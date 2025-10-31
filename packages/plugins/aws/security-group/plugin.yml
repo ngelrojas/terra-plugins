@@ -1,0 +1,26 @@
+name: aws/security-group
+version: 0.1.0
+provider: aws
+description: Create and manage security groups
+inputs:
+  - name: security_group_name
+    type: string
+  - name: vpc_id
+    type: string
+  - name: description
+    type: string
+    optional: true
+outputs:
+  - name: security_group_id
+  - name: security_group_arn
+  - name: security_group_name
+dependencies:
+  - aws/vpc
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: ec2:CreateSecurityGroup
+        resource: "*"
+      - action: ec2:DescribeSecurityGroups
+        resource: "*"
+

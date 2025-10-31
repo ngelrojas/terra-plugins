@@ -57,7 +57,9 @@ export async function resolveAndCopyPlugin({
       sourceDir = path.resolve(process.cwd(), workspacePath);
     }
   }
-  const dest = path.join(projectDir, 'plugins', pluginName);
+  // Create flattened directory name (e.g., "aws/s3" -> "aws-s3")
+  const flattenedName = pluginName.replace(/\//g, '-');
+  const dest = path.join(projectDir, flattenedName);
   await copyDir(sourceDir, dest);
 }
 

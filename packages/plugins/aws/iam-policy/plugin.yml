@@ -1,0 +1,24 @@
+name: aws/iam-policy
+version: 0.1.0
+provider: aws
+description: Create and attach IAM Policy
+inputs:
+  - name: policy_name
+    type: string
+  - name: policy_document
+    type: string
+  - name: role_name
+    type: string
+    optional: true
+outputs:
+  - name: policy_arn
+  - name: policy_id
+  - name: policy_name
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: iam:CreatePolicy
+        resource: "*"
+      - action: iam:AttachRolePolicy
+        resource: "*"
+

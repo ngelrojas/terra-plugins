@@ -11,8 +11,12 @@ export async function renderTerraform(projectDir: string, manifest: ProjectManif
 
     for (const name of order) {
         const meta = metas.find(m => m.name === name)!;
-        const sourcePath = `./plugins/${name}`;
-        outMain.push(`module "${name.replace(/-/g, '_')}" {\n source = \"${sourcePath}\"\n}`);
+        // Convert "aws/s3" to "aws-s3" for the directory path
+        const flattenedName = name.replace(/\//g, '-');
+        const sourcePath = `./${flattenedName}`;
+        // Replace slashes and dashes with underscores for valid Terraform module names
+        const moduleName = name.replace(/[\/\-]/g, '_');
+        outMain.push(`module "${moduleName}" {\n source = \"${sourcePath}\"\n}`);
     }
 
 
