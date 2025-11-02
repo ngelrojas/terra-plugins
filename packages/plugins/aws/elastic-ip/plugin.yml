@@ -1,4 +1,4 @@
-name: aws/elastic-ip
+name: aws-elastic-ip
 version: 0.1.0
 provider: aws
 description: Allocate Elastic IP
@@ -22,7 +22,61 @@ capabilities:
         resource: "*"
       - action: ec2:AssociateAddress
         resource: "*"
-name: aws/route-table
+  output "route_table_id" {
+  value       = aws_route_table.this.id
+  description = "ID of the route table"
+}
+
+  output "route_table_arn" {
+  value       = aws_route_table.this.arn
+  description = "ARN of the route table"
+}
+  variable "route_table_name" {
+  type        = string
+  description = "Name of the route table"
+}
+
+  variable "vpc_id" {
+  type        = string
+  description = "VPC ID where the route table will be created"
+}
+
+  variable "gateway_id" {
+  type        = string
+  description = "Internet gateway ID for routing"
+  default     = ""
+}
+
+  variable "destination_cidr_block" {
+  type        = string
+  description = "Destination CIDR block for the route"
+  default     = "0.0.0.0/0"
+}
+  terraform {
+  required_providers {
+  aws = {
+  source  = "hashicorp/aws"
+  version = ">= 5.0"
+}
+}
+}
+
+  resource "aws_route_table" "this" {
+  vpc_id = var.vpc_id
+
+  tags = {
+  Name      = var.route_table_name
+  ManagedBy = "terra-plugins"
+}
+}
+
+  resource "aws_route" "internet_access" {
+count                  = var.gateway_id != "" ? 1 : 0
+  route_table_id         = aws_route_table.this.id
+  destination_cidr_block = var.destination_cidr_block
+  gateway_id             = var.gateway_id
+}
+name: aws-route-table
 version: 0.1.0
 provider: aws
 description: Manage VPC routing
@@ -41,8 +95,8 @@ outputs:
   - name: route_table_id
   - name: route_table_arn
 dependencies:
-  - aws/vpc
-  - aws/internet-gateway
+  - aws-vpc
+  - aws-internet-gateway
 capabilities:
   - actor: instance-profile
     needs:
@@ -50,45 +104,24 @@ capabilities:
         resource: "*"
       - action: ec2:CreateRoute
         resource: "*"
-name: aws/internet-gateway
+name: aws-iam-role
 version: 0.1.0
 provider: aws
-description: Attach internet gateway to VPC for internet access
+description: Create IAM Role with assume role policy
 inputs:
-  - name: igw_name
+  - name: role_name
     type: string
-  - name: vpc_id
+  - name: assume_role_policy
     type: string
 outputs:
-  - name: igw_id
-  - name: igw_arn
-dependencies:
-  - aws/vpc
+  - name: role_arn
+  - name: role_name
+  - name: role_id
 capabilities:
   - actor: instance-profile
     needs:
-      - action: ec2:CreateInternetGateway
+      - action: iam:CreateRole
         resource: "*"
-      - action: ec2:AttachInternetGateway
+      - action: iam:GetRole
         resource: "*"
-name: aws/sqs
-version: 0.1.0
-provider: aws
-description: Managed SQS queue with optional DLQ
-inputs:
-  - name: queue_name
-    type: string
-  - name: use_dlq
-    type: bool
-    optional: true
-outputs:
-  - name: queue_arn
-  - name: queue_url
-capabilities:
-  - actor: lambda
-    needs:
-      - action: sqs:ReceiveMessage
-        resource: ${queue_arn}
-      - action: sqs:DeleteMessage
-        resource: ${queue_arn}
 

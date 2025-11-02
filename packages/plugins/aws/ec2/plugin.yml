@@ -1,0 +1,50 @@
+name: aws/ec2
+version: 0.1.0
+provider: aws
+description: Provision EC2 instances
+
+inputs:
+  - name: instance_name
+    type: string
+  - name: ami
+    type: string
+  - name: instance_type
+    type: string
+  - name: subnet_id
+    type: string
+  - name: vpc_security_group_ids
+    type: list(string)
+  - name: key_name
+    type: string
+    optional: true
+  - name: associate_public_ip_address
+    type: bool
+    optional: true
+  - name: user_data
+    type: string
+    optional: true
+  - name: iam_instance_profile
+    type: string
+    optional: true
+  - name: root_volume_size
+    type: number
+    optional: true
+  - name: root_volume_type
+    type: string
+    optional: true
+outputs:
+  - name: instance_id
+  - name: instance_arn
+  - name: private_ip
+  - name: public_ip
+  - name: public_dns
+  - name: private_dns
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: ec2:RunInstances
+        resource: "*"
+      - action: ec2:DescribeInstances
+        resource: "*"
+      - action: ec2:CreateTags
+        resource: "*"

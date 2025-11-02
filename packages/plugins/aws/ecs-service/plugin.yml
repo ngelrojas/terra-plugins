@@ -1,0 +1,55 @@
+name: aws/ecs-service
+version: 0.1.0
+provider: aws
+description: Manage ECS services
+inputs:
+  - name: service_name
+    type: string
+  - name: cluster_arn
+    type: string
+  - name: task_definition
+    type: string
+  - name: desired_count
+    type: number
+  - name: launch_type
+    type: string
+    optional: true
+  - name: platform_version
+    type: string
+    optional: true
+  - name: network_mode
+    type: string
+    optional: true
+  - name: subnets
+    type: list(string)
+    optional: true
+  - name: security_groups
+    type: list(string)
+    optional: true
+  - name: assign_public_ip
+    type: bool
+    optional: true
+  - name: load_balancer
+    type: any
+    optional: true
+  - name: health_check_grace_period_seconds
+    type: number
+    optional: true
+  - name: enable_execute_command
+    type: bool
+    optional: true
+outputs:
+  - name: service_id
+  - name: service_arn
+  - name: service_name
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: ecs:CreateService
+        resource: "*"
+      - action: ecs:DescribeServices
+        resource: "*"
+      - action: ecs:UpdateService
+        resource: "*"
+      - action: iam:PassRole
+        resource: "*"

@@ -1,0 +1,49 @@
+name: aws/autoscaling-group
+version: 0.1.0
+provider: aws
+description: Manage EC2 scaling groups
+inputs:
+  - name: asg_name
+    type: string
+  - name: launch_template_id
+    type: string
+  - name: launch_template_version
+    type: string
+    optional: true
+  - name: min_size
+    type: number
+  - name: max_size
+    type: number
+  - name: desired_capacity
+    type: number
+  - name: vpc_zone_identifier
+    type: list(string)
+  - name: target_group_arns
+    type: list(string)
+    optional: true
+  - name: health_check_type
+    type: string
+    optional: true
+  - name: health_check_grace_period
+    type: number
+    optional: true
+  - name: default_cooldown
+    type: number
+    optional: true
+  - name: termination_policies
+    type: list(string)
+    optional: true
+outputs:
+  - name: asg_id
+  - name: asg_arn
+  - name: asg_name
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: autoscaling:CreateAutoScalingGroup
+        resource: "*"
+      - action: autoscaling:DescribeAutoScalingGroups
+        resource: "*"
+      - action: autoscaling:UpdateAutoScalingGroup
+        resource: "*"
+

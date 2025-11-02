@@ -1,0 +1,60 @@
+name: aws/eks-cluster
+version: 0.1.0
+provider: aws
+description: Provision AWS EKS (Elastic Kubernetes Service) cluster
+
+inputs:
+  - name: cluster_name
+    type: string
+  - name: role_arn
+    type: string
+  - name: subnet_ids
+    type: list(string)
+  - name: security_group_ids
+    type: list(string)
+    optional: true
+  - name: endpoint_private_access
+    type: bool
+    optional: true
+  - name: endpoint_public_access
+    type: bool
+    optional: true
+  - name: public_access_cidrs
+    type: list(string)
+    optional: true
+  - name: kubernetes_version
+    type: string
+    optional: true
+  - name: enabled_cluster_log_types
+    type: list(string)
+    optional: true
+  - name: encryption_config_key_arn
+    type: string
+    optional: true
+
+outputs:
+  - name: cluster_id
+  - name: cluster_arn
+  - name: cluster_endpoint
+  - name: cluster_certificate_authority_data
+  - name: cluster_security_group_id
+  - name: cluster_version
+
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: eks:CreateCluster
+        resource: "*"
+      - action: eks:DescribeCluster
+        resource: "*"
+      - action: eks:UpdateClusterVersion
+        resource: "*"
+      - action: eks:UpdateClusterConfig
+        resource: "*"
+      - action: iam:PassRole
+        resource: "*"
+      - action: ec2:DescribeSubnets
+        resource: "*"
+      - action: ec2:DescribeSecurityGroups
+        resource: "*"
+

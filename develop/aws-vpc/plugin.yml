@@ -1,0 +1,28 @@
+name: aws/vpc
+version: 0.1.0
+provider: aws
+description: Create VPC network
+inputs:
+  - name: vpc_name
+    type: string
+  - name: cidr_block
+    type: string
+  - name: enable_dns_support
+    type: bool
+    optional: true
+  - name: enable_dns_hostnames
+    type: bool
+    optional: true
+outputs:
+  - name: vpc_id
+  - name: vpc_arn
+  - name: vpc_cidr_block
+  - name: default_security_group_id
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: ec2:CreateVpc
+        resource: "*"
+      - action: ec2:DescribeVpcs
+        resource: "*"
+

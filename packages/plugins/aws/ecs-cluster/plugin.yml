@@ -1,0 +1,30 @@
+name: aws/ecs-cluster
+version: 0.1.0
+provider: aws
+description: Create ECS cluster
+inputs:
+  - name: cluster_name
+    type: string
+  - name: capacity_providers
+    type: list(string)
+    optional: true
+  - name: default_capacity_provider_strategy
+    type: any
+    optional: true
+  - name: enable_container_insights
+    type: bool
+    optional: true
+outputs:
+  - name: cluster_id
+  - name: cluster_arn
+  - name: cluster_name
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: ecs:CreateCluster
+        resource: "*"
+      - action: ecs:DescribeClusters
+        resource: "*"
+      - action: ecs:PutAccountSetting
+        resource: "*"
+

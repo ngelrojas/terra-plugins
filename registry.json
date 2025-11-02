@@ -1,38 +1,68 @@
 [
   {
-    "name": "aws/s3",
-    "description": "Create an S3 bucket (versioning, blocking public ACLs)",
-    "source": "workspace:packages/plugins/aws/s3"
+    "name": "aws/autoscaling-group",
+    "description": "Manage EC2 scaling groups",
+    "source": "workspace:packages/plugins/aws/autoscaling-group"
   },
   {
-    "name": "aws/sqs",
-    "description": "Create an SQS queue (optional DLQ)",
-    "source": "workspace:packages/plugins/aws/sqs"
+    "name": "aws/ec2",
+    "description": "Provision EC2 instances",
+    "source": "workspace:packages/plugins/aws/ec2"
   },
   {
-    "name": "aws/iam-role",
-    "description": "Create IAM Roles with assume role policy",
-    "source": "workspace:packages/plugins/aws/iam-role"
+    "name": "aws/ecs-cluster",
+    "description": "Create ECS cluster",
+    "source": "workspace:packages/plugins/aws/ecs-cluster"
+  },
+  {
+    "name": "aws/ecs-service",
+    "description": "Manage ECS services",
+    "source": "workspace:packages/plugins/aws/ecs-service"
+  },
+  {
+    "name": "aws/eks-cluster",
+    "description": "Provision AWS EKS (Elastic Kubernetes Service) cluster",
+    "source": "workspace:packages/plugins/aws/eks-cluster"
+  },
+  {
+    "name": "aws/elastic-ip",
+    "description": "Allocate Elastic IP",
+    "source": "workspace:packages/plugins/aws/elastic-ip"
   },
   {
     "name": "aws/iam-policy",
-    "description": "Create and attach IAM Policies",
+    "description": "Create and attach IAM Policy",
     "source": "workspace:packages/plugins/aws/iam-policy"
   },
   {
+    "name": "aws/iam-role",
+    "description": "Create IAM Role with assume role policy",
+    "source": "workspace:packages/plugins/aws/iam-role"
+  },
+  {
     "name": "aws/iam-user",
-    "description": "Create IAM users and access keys",
+    "description": "Create IAM user and access keys",
     "source": "workspace:packages/plugins/aws/iam-user"
   },
   {
-    "name": "aws/vpc",
-    "description": "Create VPC network",
-    "source": "workspace:packages/plugins/aws/vpc"
+    "name": "aws/internet-gateway",
+    "description": "No description available",
+    "source": "workspace:packages/plugins/aws/internet-gateway"
   },
   {
-    "name": "aws/subnet",
-    "description": "Create public/private subnets",
-    "source": "workspace:packages/plugins/aws/subnet"
+    "name": "aws/lambda",
+    "description": "No description available",
+    "source": "workspace:packages/plugins/aws/lambda"
+  },
+  {
+    "name": "aws/launch-template",
+    "description": "Define EC2 launch templates",
+    "source": "workspace:packages/plugins/aws/launch-template"
+  },
+  {
+    "name": "aws/route-table",
+    "description": "No description available",
+    "source": "workspace:packages/plugins/aws/route-table"
   },
   {
     "name": "aws/security-group",
@@ -40,18 +70,23 @@
     "source": "workspace:packages/plugins/aws/security-group"
   },
   {
-    "name": "aws/internet-gateway",
-    "description": "Attach internet gateway to VPC for internet access",
-    "source": "workspace:packages/plugins/aws/internet-gateway"
+    "name": "aws/subnet",
+    "description": "Create public/private subnets",
+    "source": "workspace:packages/plugins/aws/subnet"
   },
   {
-    "name": "aws/route-table",
-    "description": "Manage VPC routing",
-    "source": "workspace:packages/plugins/aws/route-table"
+    "name": "aws/vpc",
+    "description": "Create VPC network",
+    "source": "workspace:packages/plugins/aws/vpc"
   },
   {
-    "name": "aws/elastic-ip",
-    "description": "Allocate Elastic IP for EC2 or NAT Gateway",
-    "source": "workspace:packages/plugins/aws/elastic-ip"
+    "name": "azure/vm",
+    "description": "No description available",
+    "source": "workspace:packages/plugins/azure/vm"
+  },
+  {
+    "name": "gcp/compute-instance",
+    "description": "No description available",
+    "source": "workspace:packages/plugins/gcp/compute-instance"
   }
 ]

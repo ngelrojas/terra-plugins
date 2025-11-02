@@ -11,6 +11,7 @@
     "dev": "pnpm --filter @terra/cli run dev",
     "typecheck": "pnpm -r --filter '@terra/*' run typecheck",
     "link:global": "pnpm --filter @terra/cli link --global",
-    "unlink:global": "pnpm --filter @terra/cli unlink --global"
+    "unlink:global": "pnpm --filter @terra/cli unlink --global",
+    "sync-registry": "node sync-registry.js"
   }
 }

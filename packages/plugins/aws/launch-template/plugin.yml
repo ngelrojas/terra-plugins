@@ -1,0 +1,42 @@
+name: aws/launch-template
+version: 0.1.0
+provider: aws
+description: Define EC2 launch templates
+inputs:
+  - name: template_name
+    type: string
+  - name: ami
+    type: string
+  - name: instance_type
+    type: string
+  - name: key_name
+    type: string
+    optional: true
+  - name: vpc_security_group_ids
+    type: list(string)
+    optional: true
+  - name: user_data
+    type: string
+    optional: true
+  - name: iam_instance_profile_arn
+    type: string
+    optional: true
+  - name: associate_public_ip_address
+    type: bool
+    optional: true
+  - name: block_device_mappings
+    type: any
+    optional: true
+outputs:
+  - name: launch_template_id
+  - name: launch_template_arn
+  - name: launch_template_name
+  - name: latest_version
+capabilities:
+  - actor: instance-profile
+    needs:
+      - action: ec2:CreateLaunchTemplate
+        resource: "*"
+      - action: ec2:DescribeLaunchTemplates
+        resource: "*"
+
